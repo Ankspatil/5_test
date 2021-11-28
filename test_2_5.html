@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sum of even & odd</title>
+</head>
+<body>
+    <script>
+
+function *generateOdd(start, end) {
+  for (let i = start; i <= end; i++) {
+    if (i % 2 === 1) { yield i; }
+  }
+}
+
+function *generateEven(start, end) {
+  for (let i = start; i <= end; i++) {
+    if (i % 2 === 0) { yield i; }
+  }
+}
+
+function sumNums(gen, start, end) {
+  const generator = gen(start, end);
+  let res = 0;
+
+  let item = generator.next();
+  while (!item.done) {
+    res += item.value;
+    item = generator.next();
+  }
+
+  return res;
+}
+
+console.log(sumNums(generateOdd, 0, 20));
+console.log(sumNums(generateEven, 0, 20));
+        </script>
+        
+</body>
+</html>
